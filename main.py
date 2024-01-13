@@ -29,6 +29,6 @@ def predict_crop(image_path):
 
 
 # Example
-image_path = 'path_to_satellite_image.jpg'
+image_path = 'imagine.jpg'
 crop_type = predict_crop(image_path)
 print("Predicted Crop Type:", crop_type.item())
