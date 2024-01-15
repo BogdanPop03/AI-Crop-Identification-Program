@@ -1,23 +1,24 @@
 # AI-Crop-Identification-Program
 
-This code is a Python script that uses a pre-trained ResNet-50 model from the torchvision library to predict the crop type in a given satellite image. Here's a breakdown of the code:
+This Python script uses a pre-trained ResNet-50 model to predict crop types in satellite images located in a specified folder. Here's a breakdown of the code:
 
 1. Importing Libraries:
 
+os: Operating system-specific functionality.
 torch: PyTorch, a deep learning library.
 transforms from torchvision: For image preprocessing transformations.
 Image from PIL: Python Imaging Library, for handling images.
 models from torchvision: Pre-trained deep learning models.
 
-2. Loading the Pre-trained Model:
+2. Loading the Pre-trained Model (models.resnet50):
 
-Tries to load a pre-trained ResNet-50 model. If an exception occurs, it prints an error message and exits the program.
+Tries to load a pre-trained ResNet-50 model from torchvision. If an exception occurs, it prints an error message and exits the program.
 
 3. Image Preprocessing Function (preprocess_image):
 
 Takes an image file path as input.
 Attempts to open the image using the PIL library.
-Applies a series of image transformations using transforms.Compose.
+Applies a series of image transformations using transforms.Compose:
 Resize the image to 256x256 pixels.
 Crop the center to 224x224 pixels.
 Convert the image to a PyTorch tensor.
@@ -32,10 +33,16 @@ If the preprocessing fails (returns None), it returns None.
 Uses the pre-trained ResNet-50 model to make predictions on the preprocessed image.
 Returns the index of the predicted crop type.
 
-5. Example Usage (image_path and predict_crop):
+5. Processing Images in a Folder (process_images_in_folder):
 
-Specifies an example image file path ('imagine.jpg').
-Calls the predict_crop function on the example image.
-If the prediction is successful, it prints the predicted crop type. Otherwise, it prints an error message.
+Takes a folder path as input.
+Iterates through all files in the folder with specified image extensions (e.g., '.jpg', '.jpeg', '.png').
+Calls the predict_crop function for each image in the folder.
+Prints the filename and the predicted crop type if successful, or an error message if the prediction fails.
 
-In summary, this script demonstrates how to use a pre-trained ResNet-50 model to predict the crop type in a satellite image. The example at the end shows how to use the functions in a practical context. To use this code for another project, you'd need to have PyTorch and torchvision installed, and you can replace the example image path with the path to your own satellite image.
+6. Example Usage (folder_path and process_images_in_folder):
+
+Specifies an example folder path ('images').
+Calls the process_images_in_folder function to predict crop types for all images in the specified folder.
+
+In summary, this script provides a simple way to process multiple images in a folder, predict their crop types using a pre-trained ResNet-50 model, and print the results. Users can adapt this code for their specific use cases by changing the folder path or incorporating it into a larger project.

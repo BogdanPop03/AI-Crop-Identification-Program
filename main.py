@@ -1,3 +1,4 @@
+import os
 import torch
 import torchvision.transforms as transforms
 from PIL import Image
@@ -49,11 +50,24 @@ def predict_crop(image_path):
         return None
 
 
-# Example
-image_path = 'imagine.jpg'
-crop_type = predict_crop(image_path)
+def process_images_in_folder(folder_path):
+    """Process all images in the specified folder."""
+    try:
+        for filename in os.listdir(folder_path):
+            if filename.endswith(('.jpg', '.jpeg', '.png')):
+                image_path = os.path.join(folder_path, filename)
+                crop_type = predict_crop(image_path)
 
-if crop_type is not None:
-    print("Predicted Crop Type:", crop_type.item())
-else:
-    print("Error predicting crop type. Check the logs for details.")
+                if crop_type is not None:
+                    print(f"Image: {filename}, Predicted Crop Type: {
+                        crop_type.item()}")
+                else:
+                    print(f"Error predicting crop type for {
+                        filename}. Check the logs for details.")
+    except Exception as e:
+        print("Error processing images in folder:", str(e))
+
+
+# Usage
+folder_path = 'images'
+process_images_in_folder(folder_path)
