@@ -54,7 +54,7 @@ def process_images_in_folder(folder_path):
     """Process all images in the specified folder."""
     try:
         for filename in os.listdir(folder_path):
-            if filename.endswith(('.jpg', '.jpeg', '.png')):
+            if filename.endswith(('.jpg', '.jpeg', '.png', 'tif')):
                 image_path = os.path.join(folder_path, filename)
                 crop_type = predict_crop(image_path)
 
